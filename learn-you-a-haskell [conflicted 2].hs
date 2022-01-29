@@ -17,7 +17,7 @@
 -- Quit gchi
 -- :q or :quit
 
------- Logic
+------ logic
 -- && - Boolean and
 -- || - Boolean or 
 -- not - negate 
@@ -26,7 +26,7 @@
 -- == - equal
 -- /= - not equal
 
----- Number Functions
+---- number functions
 -- succ - successor function, takes a parameter and returns the next number up
 findSuccessor = succ 10
 -- min - takes 2 parameters, returns the smaller one
@@ -39,6 +39,5 @@ divisionMod = 92 `div` 10
 divisionExact = 92 /  10
 
 -- A prefix function can be changed to an infix function with ``
--- prefixFunc a b
--- a `infixFunc` b
-
+let concatPrint x y = putStrLn $ (++) x y
+"a" `concatPrint` "b"
