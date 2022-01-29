@@ -1,4 +1,4 @@
------- ghci
+------ ghci aka glasgow haskell compiler interactive
 -- Open Haskell compiler
 -- gchi
 
@@ -16,6 +16,13 @@
 
 -- Quit gchi
 -- :q or :quit
+
+------ Haskell
+-- Haskell is purely functional programming language. In functional programming you tell computer what stuff is as opposed to what to do. -- Functions have no side effects. The only thing they can do is calculate something and return a result.
+-- Haskell is lazy. This means it won't execute functions unless it needs to show result. 
+-- Haskell is statically typed. Compiler knows data type of different items in code, allowing errors to be caught at compile time.
+-- Haskell uses type inference, which allows it to figure out which data is which type. 
+-- Haskell is elegant and concise, with programs usually shorter than imperative equivalent. Easy to maintain and less bugs.
 
 ------ Logic
 -- && - Boolean and
@@ -41,6 +48,13 @@ divisionExact = 92 /  10
 -- A prefix function can be changed to an infix function with ``
 -- prefixFunc a b
 -- a `infixFunc` b
+
+-- If using a negative number, surround it in parenthesis 
+-- (-3)
+
+-- Operations will take place in the order of the precedence of operations (PEMDAS). 
+-- Use parenthesis to define order of operations. 
+-- Functions have the highest precedence of all operations in Haskell.
 
 ---- Function Definitions
 
