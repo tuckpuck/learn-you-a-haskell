@@ -1,3 +1,4 @@
+------ ghci
 -- Open Haskell compiler
 -- gchi
 
@@ -16,7 +17,11 @@
 -- Quit gchi
 -- :q or :quit
 
-
-
-
-
+------ logic
+-- && - Boolean and
+-- || - Boolean or 
+-- not - negate 
+-- True
+-- False
+-- == - equal
+-- /= - not equal
