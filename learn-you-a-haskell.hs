@@ -111,3 +111,11 @@ listInListConcat = listInList ++ [[13,14,15,16]]
 listInListCons = [6,6,6] : listInList
 --  Find an element in list in list
 listInListElem = listInList !! 2
+
+-- Comparing lists
+-- First two items are compared. If equal, the second two are. And so on. Other options are <=, >=, >, <. Nonempty lists is always considered greater than an empty one. 
+comp1 = [3,2,1]>[2,1,0] -- True
+comp2 = [3,2,1]>[2,10,100] -- True
+comp3 = [3,4,2]<[3,4,3] -- True
+comp4 = [3,4,2]>[2,4] -- True
+comp5 = [3,4,2]==[3,4,2] -- True
