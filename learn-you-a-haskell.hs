@@ -1,4 +1,4 @@
------- ghci aka glasgow haskell compiler interactive
+------ ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
 -- gchi
 
@@ -17,14 +17,16 @@
 -- Quit gchi
 -- :q or :quit
 
------- Haskell
+-- if defining a variable in ghci, use let before (ex let a = 1)
+
+------ Haskell ----
 -- Haskell is purely functional programming language. In functional programming you tell computer what stuff is as opposed to what to do. -- Functions have no side effects. The only thing they can do is calculate something and return a result.
 -- Haskell is lazy. This means it won't execute functions unless it needs to show result. 
 -- Haskell is statically typed. Compiler knows data type of different items in code, allowing errors to be caught at compile time.
 -- Haskell uses type inference, which allows it to figure out which data is which type. 
 -- Haskell is elegant and concise, with programs usually shorter than imperative equivalent. Easy to maintain and less bugs.
 
------- Logic
+------ Logic ----
 -- && - Boolean and
 -- || - Boolean or 
 -- not - negate 
@@ -33,7 +35,7 @@
 -- == - equal
 -- /= - not equal
 
----- Number Functions
+---- Number Functions ----
 -- succ - successor function, takes a parameter and returns the next number up
 findSuccessor = succ 10
 -- min - takes 2 parameters, returns the smaller one
@@ -56,7 +58,7 @@ divisionExact = 92 /  10
 -- Use parenthesis to define order of operations. 
 -- Functions have the highest precedence of all operations in Haskell.
 
----- Function Definitions
+---- Function Definitions ----
 
 -- Function name is followed by parameters separated by spaces. After parameters is = operator, followed by function body.
 -- Functions can't begin with capital letters
@@ -76,3 +78,36 @@ doubleSmallNumber' x = (if x > 100 then x else x * 2) + 1
 
 -- A definition or name takes no parameters and cannot be changed once set
 myName = "Tucker Triggs" 
+
+---- Lists ----
+-- Lists are homogenous data structures, store several items of the same data type
+
+-- List syntax
+numList = [1,2,4,5,6,8]
+
+-- Concatenating lists
+-- ++ operator always takes two lists
+catList = [1,2,3,4,5] ++ [6,7,8,9,10]
+catList2 = [1,2,3] ++ [4]
+
+-- In Haskell, strings are just lists of characters. So list functions can be used on strings.
+
+-- Cons operator is used to add something to beginning of list
+-- Much faster than adding to end of big list (because Haskell then has to go through entire list)
+-- First argument always a single item of same type
+conListLetter = 'A':" Small Cat"
+conListNum = 5:[1,2,3,4,5,6]
+
+-- Use !! operator to get element of a list by index
+index = "Tucker Triggs" !! 8 
+indexNumList = [1,2,3,4,5,6,7] !! 3
+
+-- Lists in lists
+-- Lists in lists also have to be of a single type
+listInList = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+-- Add another list within a list to end
+listInListConcat = listInList ++ [[13,14,15,16]]
+-- Add another list within a list to beginning
+listInListCons = [6,6,6] : listInList
+--  Find an element in list in list
+listInListElem = listInList !! 2
