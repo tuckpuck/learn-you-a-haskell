@@ -119,3 +119,46 @@ comp2 = [3,2,1]>[2,10,100] -- True
 comp3 = [3,4,2]<[3,4,3] -- True
 comp4 = [3,4,2]>[2,4] -- True
 comp5 = [3,4,2]==[3,4,2] -- True
+
+-- List slicing functions
+-- Head function takes a list and returns its first element
+getHead = head [1,2,3,4,5,6]
+-- Tail takes a list and returns everything but the first element
+getTail = tail [1,2,3,4,5,6]
+-- Last returns a list's last element
+getLast = last [1,2,3,4,5,6]
+-- Init returns everything but the last element
+getInit = init [1,2,3,4,5,6]
+-- If you try to run an above slicing function on an empty list it will throw error, but it is not caught at compile time
+
+-- Take takes a given number of elements from a list into a new list
+take3 = take 3 [5,7,2,5,8,7,4]
+-- Drop drops a given number of elements in a list and returns the rest
+drop3 = drop 3 [5,7,2,5,8,7,4]
+
+-- null function checks if a list is empty. If it is, it returns True, otherwise it returns False
+isListNull = null [1,2,3]
+isEmptyListNull = null []
+
+
+-- Other List functions
+-- Length function returns length of list
+getLength = length [1,2,3]
+
+-- Reverse reverses a list
+revList = reverse [1,2,3,4,5]
+
+-- Maximum finds the largest element in a list
+findMax = maximum [1,3,6,2,7,8]
+-- Minimum finds the smallest element in a list
+findMin = minimum [1,3,6,2,7,8]
+
+-- Sum takes a list of numbers and returns their sum
+findSum = sum [1,2,3,4,5,6,7,8,9,10]
+
+-- Product takes a list of numbers and returns their product
+findProduct = product [1,2,3,4,5,6,7,8,9,10]
+
+-- Elem takes an item and a list of items and tells if that item is an element of the list. Usually done as infix.
+inList = 4 `elem` [3,4,5,6]
+notInList = 10 `elem` [3,4,5,6]
