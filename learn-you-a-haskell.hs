@@ -202,3 +202,44 @@ replicateLetter = replicate 10 "hey"
 -- Be careful about suing floating-point numbers in ranges because they can have strange results and overshoot upper limit due to their precision
 -- For example: 
 floatingRange = [0.1,0.3..1]
+
+---- List Comprehensions ----
+-- List comprehensions are a way to filter, transform, and combine lists
+
+-- Syntax: First section is the operation we do on the list. After pipe is the variable that we are binding to. Finally, the initial list we are pulling from
+doubleAllListElems =  [x * 2 | x <- [1..10]]
+squareEach = [ x * x | x <- [1..100]]
+
+-- List comprehension with condition (aka predicate)
+-- Condition is added after the rest of the comprehension with a comma
+-- All elements that, after being tripled, are less than or equal to 100
+conditionalComp = [x * 3 | x <- [1..100], x * 3 <= 100]
+-- All numbers from 50 to 100 whose remainder when divided by 7 is 3: 
+modulusComp = [ x | x <- [50..100], x `mod` 7 == 3]
+
+-- Replace every odd number greater than 10 with 'Bang' and every odd number less than 10 wih Boom. 
+-- Add predicate to a separate function for simplicity: 
+bangBoom xs = [if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]
+
+-- Multiple conditions can be added
+multipleConditions = [ x | x <- [10..20], x/= 13, x/=15, x/=19]
+
+-- Multiple lists can be drawn from. This list comprehension adds all combinations of both lists
+addBothLists = [x+y|x<-[1,2,3], y<-[100,200,300]]
+
+-- This list comprehension multiplies all combinations of both lists, and returns products that are over 50
+multiplyBothLists = [x*y|x<-[2,5,10], y<-[8,10,100], x*y > 50]
+
+-- Make our own length function
+-- Underscore is used as a temporary variable 
+length' xs = sum [1 | _ <- xs]
+
+-- removeNonUppercase
+removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+
+-- Pass in lists of lists
+xxs = [[1,3,5,2,3,1,2,4,3], [1,2,3,4,5,6,7,8,9], [1,2,4,2,1,6,3,1,3,2,3,6]]
+removeOddsFromListsInLists = [[x | x <- xs , even x] | xs <- xxs]
+
+
+
