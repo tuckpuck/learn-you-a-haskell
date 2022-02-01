@@ -162,3 +162,43 @@ findProduct = product [1,2,3,4,5,6,7,8,9,10]
 -- Elem takes an item and a list of items and tells if that item is an element of the list. Usually done as infix.
 inList = 4 `elem` [3,4,5,6]
 notInList = 10 `elem` [3,4,5,6]
+
+---- Ranges ----
+-- Ranges ar a way to make lists that can be enumerated (counted off in order)
+-- Numbers and the alphabet can both be enumerated
+oneToTwenty = [1..20]
+alphabet = ['a'..'z']
+alphabetUpper = ['A'..'Z']
+
+-- A step can be added to change the interval between items. Separate the first two items with a comma, add .., then specify upper limit
+-- Can only specify a single step 
+countByTwo = [2,4..20]
+countByThree = [3,6..20]
+everyOtherLetter = ['a', 'c'..'z']
+
+-- To make a descending list, you must use steps. Otherwise it will increment instead of decrement and end up as an empty list
+-- This works:
+decWithSteps = [20,19..1]
+-- This returns an empty list: 
+decWithoutSteps  = [20..1]
+
+-- Get a certain number of multiples of something
+twentyFourMultiplesOfThirteen = [13,26..24*13]
+-- Better way to get a certain number of items, using infinite list
+twentyFourMultiplesOfThirteenInfiniteList = take 24 [13,26..]
+
+-- Cycle over items to replicate elements. Cycles indefinitely by default so be sure to cut it somewhere
+cycleList = take 10 (cycle [1,2,3])
+cycleWords = take 100 (cycle "honk ")
+
+-- Repeat takes an element and produces infinite list of that element. Like cycling but with one element. 
+repeatList = take 50 (repeat(5))
+repeatLetter = take 20 (repeat('h'))
+
+-- Replicate is another way to create a list composed of single item. Takes the length of the list and item to replicate
+replicateList = replicate 20 100
+replicateLetter = replicate 10 "hey"
+
+-- Be careful about suing floating-point numbers in ranges because they can have strange results and overshoot upper limit due to their precision
+-- For example: 
+floatingRange = [0.1,0.3..1]
