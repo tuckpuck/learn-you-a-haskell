@@ -1,4 +1,4 @@
------- ghci aka glasgow haskell compiler interactive ----
+---- ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
 -- gchi
 
@@ -19,7 +19,7 @@
 
 -- if defining a variable in ghci, use let before (ex let a = 1)
 
------- Haskell ----
+---- Haskell ----
 -- Haskell is purely functional programming language. In functional programming you tell computer what stuff is as opposed to what to do. -- Functions have no side effects. The only thing they can do is calculate something and return a result.
 -- Haskell is lazy. This means it won't execute functions unless it needs to show result. 
 -- Haskell is statically typed. Compiler knows data type of different items in code, allowing errors to be caught at compile time.
@@ -240,6 +240,52 @@ removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
 -- Pass in lists of lists
 xxs = [[1,3,5,2,3,1,2,4,3], [1,2,3,4,5,6,7,8,9], [1,2,4,2,1,6,3,1,3,2,3,6]]
 removeOddsFromListsInLists = [[x | x <- xs , even x] | xs <- xxs]
+
+---- Tuples ----
+-- Tuples are used to store several heterogeneous elements as a single value
+-- Tuples have a fixed size, which needs to be known ahead of time
+tupleOne = (1,3)
+tupleTwo = (3,'a', "hello")
+tupleThree = (50, 50.4, "hello", 'b')
+
+-- Tuples are useful for representing certain types of data like vectors:
+workingVectorList = [(1,2), (8,11), (4,5)]
+-- The below will throw an error because 'doubles' and triples' considered different data types
+-- errorVectorList = [(1,2),(8,11,5),(4,5)]
+
+-- Haskell also considers tuples with the same length but different data types to be distinct types of tuples. 
+-- This will also throw an error:
+-- errorTuple = [(1,2),("One",2)]
+
+-- Tuples can represent a wide variety of data
+personTuple = ("Tucker", "Triggs", 29)
+
+-- Size of a tuple is treated as part of its type
+-- Because of this there is no general function to append to a tuple
+
+-- Tuples can be compared (like lists), but tuples of different sizes cannot be compared (unlike lists)
+
+-- Functions for tuple pairs:
+-- fst takes a pair and returns its first component
+first = fst (8, 11)
+-- snd takes a pair and returns its second component
+second = snd (8, 11)
+
+-- zip function takes two lists and 'zips' them into one list by joining matching elements into pairs
+zippedTuples = zip [1,2,3,4,5] [6,7,8,9,10]
+zippedTuples2 = zip [1..5] ["one", "two", "three", "four", "five"]
+-- If lengths don't match, zip will simply ignore the rest of the longer list
+zippedIgnoreExtra = zip [5,3,2,6,2,7,2,5,4,6,6] ["I'm", "a", "turtle"]
+zippedIgnoreExtraInfinite = zip [1..] ["apple", "orange", "cherry", "mango"]
+
+-- Finding a right triangle
+-- Generate all possible triples with elements less than or equal to 10
+triples = [(a,b,c) | c <- [1..10], a <- [1..10], b <- [1..10]]
+-- Filter triples that don't represent right triangles with predicate to check against pythaogrean theorem
+rightTriangles = [(a,b,c) | c <- [1..10], a <- [1..c], b <- [1..a], a^2 + b^2 == c^2, a+b+c == 24]
+
+
+
 
 
 
