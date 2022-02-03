@@ -284,6 +284,19 @@ triples = [(a,b,c) | c <- [1..10], a <- [1..10], b <- [1..10]]
 -- Filter triples that don't represent right triangles with predicate to check against pythaogrean theorem
 rightTriangles = [(a,b,c) | c <- [1..10], a <- [1..c], b <- [1..a], a^2 + b^2 == c^2, a+b+c == 24]
 
+---- Type System ----
+-- Every expression's type is known at compile time. If there are types that don't work, the program won't compile
+-- Haskell has type inference, so you don't need to explicitly tell Haskell what everything is. 
+
+-- :t command is used to tell what type something is
+-- :t 'a' returns Char
+-- :t True returns Bool
+-- :t "HELLO!" returns [Char]
+-- :t (True, 'a') returns (Bool, Char)
+-- :t 4 == 5 returns Bool 
+
+-- The :: operator is read as "has type of"
+-- A single character is Char, and a string of multiple characters is [Char], denoting a list of characters
 
 
 
