@@ -298,7 +298,28 @@ rightTriangles = [(a,b,c) | c <- [1..10], a <- [1..c], b <- [1..a], a^2 + b^2 ==
 -- The :: operator is read as "has type of"
 -- A single character is Char, and a string of multiple characters is [Char], denoting a list of characters
 
+-- Functions also have types, and can be given an explicit type declaration
+-- Similar letter filter function from above rewritten with type declaration:
+removeNonLowercase :: [Char] -> [Char]
+removeNonLowercase st = [ c | c <- st, c `elem` ['a'..'z']] 
 
+-- Adding type declarations for multiple inputs:
+-- (params are separated by ->, with return always coming last)
+addThree :: Int -> Int -> Int -> Int
+addThree x y z = x + y + z
 
+-- Haskell Types: 
+-- Int - integer, used for whole numbers. Bounded, so it has a minimum value and a maximum value. Those depend on your computer's CPU
+-- Integer - Also used for integers. Unbounded, so it is used for really big numbers. Less efficient than Int
+-- Float - Floating point number, used for numbers with decimals
+-- Double - Floating point number with double the precision of Float (uses twice as many bits). More memory intensive than float. 
+-- Bool - Boolean. Either True or False
+-- Char - Represents a unicode character. Denoted by single quotes
+-- Tuple - Takes on the types of their components. 
+-- () - An empty Tuple is its own type of ()
 
-
+-- Type variables:
+-- If a function works on multiple types, it will use type variables rather than explicit defined types
+-- To see an example type ':t head', which returns 'head :: [a] -> a' because the type function works on any type of list (numbers, letters, etc.)
+-- Functions that use type variables are called polymorphic functions
+-- fst returns the first item in a pair. ':t fst' will return 'fst :: (a,b) -> a'. This will throw error if given param is not a tuple pair
