@@ -323,3 +323,29 @@ addThree x y z = x + y + z
 -- To see an example type ':t head', which returns 'head :: [a] -> a' because the type function works on any type of list (numbers, letters, etc.)
 -- Functions that use type variables are called polymorphic functions
 -- fst returns the first item in a pair. ':t fst' will return 'fst :: (a,b) -> a'. This will throw error if given param is not a tuple pair
+
+-- Type classes
+-- A type class specifies a bunch of functions. When we make a type an instance of a type class, we define what those functions mean for that type
+-- Everything before the => symbol is called a class constraint, defines which types of values are allowed
+-- Eq type class is used for equality testing. 
+-- Ord is a type class whose values can be put in some order
+-- Compare function takes two values whose type is an Ord instance and returns an ordering. 
+compare1 = "Abrakadabra" `compare` "Zebra"
+compare2 = 5 `compare` 2
+compare3 = "Abrakadabra" < "Zebra"
+compare4 = 5 >= 3
+
+-- Values whose types are instances of the Show type class can be represented as strings. 
+-- Show function prints the given value as string
+show3 = show 3
+showFloat = show 5.334 
+showBool = show True
+
+-- Read type class is the opposite of true. 
+-- read function takes a string and return sa value whose type is an instance of read
+readBool = read "True" || False
+readNum = read "8.2" + 3.8
+readTheList = read "[1,2,3,4]" ++ [3]
+-- read needs a second value to know what to convert to. read "4" will throw an error because it can't infer what type is wanted
+-- String and [Char] are interchangable
+
