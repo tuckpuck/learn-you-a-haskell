@@ -357,3 +357,38 @@ readFloat = read "5" :: Float
 readExpression = (read "5" :: Float) * 4
 readListTypeAnno = read "[1,2,3,4]" :: [Int]
 readTuple = read "(3, 'a')" :: (Int, Char)
+
+-- Enum type class is for sequentially ordered types. Used to list ranges. Have defined successors and predecessors
+-- Examples of types with this class are Bool, Char, Ordering, Int, Integer, Float, and Double
+aToE = ['a'..'e']
+lessToGreater = [LT .. GT]
+threeToFive = [3..5]
+afterB = succ 'B'
+
+-- Bounded type class 
+-- Have upper and lower bound, which can be check by using the minBound and maxBound functions
+minInt = minBound :: Int
+maxChar = maxBound :: Char
+maxBool = maxBound :: Bool
+minBool = minBound :: Bool
+
+-- Num type class
+-- Numeric type class. Polymorphic, can act like any type that's an instance of Num (Int, Integer, Float, or Double)
+twenInt = 20 :: Int
+twenInteger = 20 :: Integer
+twenFloat = 20 :: Float
+twenDouble = 20 :: Double
+
+-- Floating type class
+-- Includes Float and Double types. Examples of Floating functions are sin, cos, sqrt
+
+-- Integral type class
+-- Numeric type class that includes only whole numbers, including Int and Integer types.
+-- A useful function to convert Integral numbers into more general is fromIntegral
+-- add length to floats: 
+lengthPlusFloats = fromIntegral (length [1,2,3,4]) + 3.2 + 7.3
+
+-- All type classes: Eq, Ord, Show, Read, Enum, Bounded, Num, Integral, Floating. Can also make custom type classes
+-- One type can be an instance of many type classes. One type class can be an instance of many types. 
+
+
