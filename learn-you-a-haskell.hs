@@ -346,6 +346,14 @@ showBool = show True
 readBool = read "True" || False
 readNum = read "8.2" + 3.8
 readTheList = read "[1,2,3,4]" ++ [3]
+readBoolList = [read "True", False, True, False]
 -- read needs a second value to know what to convert to. read "4" will throw an error because it can't infer what type is wanted
 -- String and [Char] are interchangable
 
+-- Type annotations 
+-- Type annotations explicitly tell Haskell what the type of an expression should be. This is done by adding :: to the end of an expression
+readInt = read "5" :: Int
+readFloat = read "5" :: Float
+readExpression = (read "5" :: Float) * 4
+readListTypeAnno = read "[1,2,3,4]" :: [Int]
+readTuple = read "(3, 'a')" :: (Int, Char)
