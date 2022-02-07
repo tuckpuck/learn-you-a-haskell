@@ -26,7 +26,7 @@
 -- Haskell uses type inference, which allows it to figure out which data is which type. 
 -- Haskell is elegant and concise, with programs usually shorter than imperative equivalent. Easy to maintain and less bugs.
 
------- Logic ----
+----- Logic ----
 -- && - Boolean and
 -- || - Boolean or 
 -- not - negate 
@@ -390,5 +390,65 @@ lengthPlusFloats = fromIntegral (length [1,2,3,4]) + 3.2 + 7.3
 
 -- All type classes: Eq, Ord, Show, Read, Enum, Bounded, Num, Integral, Floating. Can also make custom type classes
 -- One type can be an instance of many type classes. One type class can be an instance of many types. 
+
+
+----- Function Syntax ----
+-- Pattern matching 
+-- You can create separate function bodies to pattern match on functions
+-- if any lowercase letter (x, y, or myNumber) is used, it will act as a catchall pattern. Must be the last item. Should always add catchall or could hit errors.
+lucky :: Int -> String
+lucky 7 = "Lucky number 7"
+lucky x = "Sorry, you're out of luck pal"
+
+-- Factorial function with recursion and pattern matching
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+-- Catchall with char param
+charName :: Char -> String
+charName 'a' = "Albert"
+charName 'b' = "Barry"
+charName 'c' = "Cecil"
+charName x = "Other letter"
+
+-- Pattern matching using tuples 
+addVectors :: (Double, Double) -> (Double, Double) -> (Double, Double)
+addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+-- Create functions to get certain values from triples
+firstItem :: (a,b,c) -> a
+firstItem (x,_,_) = x
+
+secondItem :: (a,b,c) -> b
+secondItem (_,y,_) = y
+
+thirdItem :: (a,b,c) -> c
+thirdItem (_,_,z) = z
+
+-- Pattern matching in list comprehensions
+xs = [(2,3),(4,6),(9,5),(6,3)]
+sumListValues = [a+b | (a,b) <- xs]
+
+-- A common pattern in haskell is x:xs, where x is the head and xs is the rest of the list. Useful in recursion. 
+
+-- Find head using pattern matching
+findHead :: [a] -> a
+findHead [] = error "Can't call on an empty list"
+findHead (x:_) = x 
+-- Must surround pattern match in parenthesis because there are multiple variables (even including _)
+-- Error function takes a string and generates a runtime error. It essentially crashes the program so be careful. 
+
+tell :: (Show a) => [a] -> String
+tell [] = "The list is empty"
+tell (x:[]) = "The list has one element, " ++ show x
+tell (x:y:[]) = "The list has two elements, " ++ show x ++ " and " ++ show y
+tell (x:y:_) = "The list is long. The first two elements are " ++ show x ++ " and " ++ show y
+-- (x:[]) and (x:y:[]) is the same as [x] and [x,y]. (x:y:_) matches any list of 2 or more.
+
+-- Function that only handles lists of three elements
+addListOfThree :: (Num a) => [a] -> a
+addListOfThree (a:b:c:[]) = a + b + c
+
 
 
