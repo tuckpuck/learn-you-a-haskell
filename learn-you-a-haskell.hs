@@ -457,6 +457,27 @@ firstLetter :: String -> String
 firstLetter "" = "Empty String, can't compute"
 firstLetter all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
 
+-- Guards
+-- Guards are used check if a property that was passed is true or false. Make the most sense when you have multiple conditions. If a condition evaluates to True then it will execute. T
+bmiTell :: Double -> String
+bmiTell bm
+    | bm <= 18.5 = "You are underweight"
+    | bm <= 25.0 = "Looking good"
+    | bm <= 30.0 = "You are overweight"
+    | otherwise = "You're obese"
+-- Otherwise catches anything. If there is no otherwise and 
 
+-- modify bmi function to make calculation
+bmiTell' :: Double -> Double -> String
+bmiTell' weight height 
+    | weight / height ^ 2 <= 18.5 = "You are underweight"
+    | weight / height ^ 2 <= 25.0 = "Looking good"
+    | weight / height ^ 2 <= 30.0 = "You are overweight"
+    | otherwise = "You're obese"
 
+-- Make a max function
+max' :: (Ord a) => a -> a -> a
+max' a b
+    | a <= b = b
+    | otherwise = a
 
