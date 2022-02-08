@@ -450,5 +450,13 @@ tell (x:y:_) = "The list is long. The first two elements are " ++ show x ++ " an
 addListOfThree :: (Num a) => [a] -> a
 addListOfThree (a:b:c:[]) = a + b + c
 
+-- As patterns
+-- As pattern allows you to reference a pattern without always typing the full pattern. Written with an @
+-- Ex. by writing xs@(x:y:ys) pattern, we can then reference it with xs
+firstLetter :: String -> String
+firstLetter "" = "Empty String, can't compute"
+firstLetter all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+
+
 
 
