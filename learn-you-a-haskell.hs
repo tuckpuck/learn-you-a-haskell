@@ -481,3 +481,43 @@ max' a b
     | a <= b = b
     | otherwise = a
 
+-- Where keyword
+-- Where keyword  is used to bind a value to a variable. Similar to storing in a variable in imperative languages
+-- rewritten bmi function using where to store bmi expression: 
+bmiTell'' :: Double -> Double -> String
+bmiTell'' weight height 
+    | bmi <= 18.5 = "You are underweight"
+    | bmi <= 25.0 = "Looking good"
+    | bmi <= 30.0 = "You are overweight"
+    | otherwise = "You're obese"
+    where bmi = weight / height ^ 2
+
+-- All variables in a where statement should be aligned in a single column
+-- Variables defined in where are visible only to that function. 
+-- where bindings are not shared across function bodies of different functions. To use variables in this way, they should be defined globally: 
+badGreeting :: String
+badGreeting = "Oh! Pfft. It's you."
+
+niceGreeting :: String
+niceGreeting = "Hello! So very nice to see you"
+
+greet :: String -> String 
+greet "Juan" = niceGreeting ++ " Juan!"
+greet "Fernando" = niceGreeting ++ " Fernando!"
+greet name = badGreeting ++ " " ++ name
+
+-- Pattern matching with where
+-- Can use where bindings to pattern match
+initials :: String -> String -> String
+initials firstName lastName = [f] ++ ". " ++ [l] ++ "."
+    where (f:_) = firstName
+          (l:_) = lastName
+-- This is a demo that pattern matching can happen in where statement (as in above function) or in the parameters themselves
+
+
+-- Functions can also be used in where blocks
+-- This function takes a list of weight/height pairs and returns list of bmis:
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2
+
