@@ -521,3 +521,25 @@ calcBmis :: [(Double, Double)] -> [Double]
 calcBmis xs = [bmi w h | (w, h) <- xs]
     where bmi weight height = weight / height ^ 2
 
+-- Let expressions 
+-- Similar to where bindings. Let allows you to bind to variables anywhere and are expressions themselves. They don't span across guards. let can be used in pattern matching.
+cylinder :: Double -> Double -> Double
+cylinder r h = 
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^ 2
+    in sideArea + 2 * topArea
+
+-- let syntax: let <bindings> in <expression>
+-- let is used before the expression, whereas where is used after
+-- let is an expression and can be used inline (ex. 4 * (let a = 9 in a + 1) + 2
+-- other uses include introducing functions at a local scope:
+localLet = (let square x = x * x in [square 5, square 3, square 2])
+-- Many can be declared with semicolons:
+multiLet = (let a = 100; b = 200; c = 300 in a*b*c, let foo="hey"; bar=" there" in foo ++ bar)
+-- useful to deconstruct tuple and bind components to names
+dismantleTuple = (let (a,b,c) = (1,2,3) in a+b+c) * 100
+-- can be used in list comprehensions
+
+-- when not to use let: 
+-- can't be used in guards (too local)
+-- where can be more readable because function body is closer to its name and type declaration
