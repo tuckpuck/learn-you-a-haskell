@@ -544,6 +544,7 @@ dismantleTuple = (let (a,b,c) = (1,2,3) in a+b+c) * 100
 -- can't be used in guards (too local)
 -- where can be more readable because function body is closer to its name and type declaration
 
+
 -- let in list comprehensions 
 calculateBmis :: [(Double, Double)] -> [Double]
 calculateBmis xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2]
@@ -553,3 +554,6 @@ calculateBmis xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2]
 calculateBmis' :: [(Double, Double)] -> [Double]
 calculateBmis' xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2, bmi > 25]
 -- the <(w,h) <- xs> part of the function is known as a generator. Can't use let in a generator because it is defined prior to let binding
+
+-- let in ghci
+-- The 'in' part can be omitted in ghci. If no in is included, then names will be visible throughout entire interactive session. If 'in' is included then it will not be available after
