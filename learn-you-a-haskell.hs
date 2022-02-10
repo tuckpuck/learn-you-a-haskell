@@ -543,3 +543,13 @@ dismantleTuple = (let (a,b,c) = (1,2,3) in a+b+c) * 100
 -- when not to use let: 
 -- can't be used in guards (too local)
 -- where can be more readable because function body is closer to its name and type declaration
+
+-- let in list comprehensions 
+calculateBmis :: [(Double, Double)] -> [Double]
+calculateBmis xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2]
+-- let expression binds w/h^2 to the name bmi
+-- put let where we would use a predicate. But instead of filtering it binds values to names. Everything in the comprehension can access let
+-- could re-write function to also include a filter: 
+calculateBmis' :: [(Double, Double)] -> [Double]
+calculateBmis' xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2, bmi > 25]
+-- the <(w,h) <- xs> part of the function is known as a generator. Can't use let in a generator because it is defined prior to let binding
