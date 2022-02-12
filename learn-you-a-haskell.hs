@@ -557,3 +557,30 @@ calculateBmis' xs = [bmi | (w,h) <- xs, let bmi = w/h ^ 2, bmi > 25]
 
 -- let in ghci
 -- The 'in' part can be omitted in ghci. If no in is included, then names will be visible throughout entire interactive session. If 'in' is included then it will not be available after
+
+-- case expressions 
+-- case expressions allow you to execute blocks o code for specific values of a variable. Allow pattern matching almost anywhere in your code.
+-- head function rewritten as a case:
+head' :: [a] -> a
+head' xs = case xs of 
+    []    -> error "No head for empty lists"
+    (x:_) -> x
+
+-- case can be used to perform pattern matching in the middle of an expression
+describeList :: [a] -> String
+describeList ls = "The list is " ++ case ls of 
+    []   ->  "empty"
+    [a]  ->  "a singleton"
+    xs   ->  "a longer list"
+-- xs is a catchall pattern here
+
+
+-- A different way to do the above pattern matching, except using an inline function
+describeList' :: [a] -> String
+describeList' xs = "The list is " ++ what xs
+    where
+        what [] = "empty."
+        what [x] = "a singleton list."
+        what xs = "a longer list."
+
+
