@@ -583,4 +583,21 @@ describeList' xs = "The list is " ++ what xs
         what [x] = "a singleton list."
         what xs = "a longer list."
 
+---- Recursion ----
+-- Recursion is a way of defining functions in which the function calls itself
+-- Split a problem into smaller sub problems until we reach the base case (or base cases) which can't be broken down any further
+-- Recursion is important in Haskell because we aren't telling the computer what to do, we are telling it how to do something
+
+
+-- Maximum function can be recreated using recursion
+maximum' :: (Ord a) => [a] -> a
+maximum' [] = error "maximum of empty list!"
+maximum' [x] = x
+maximum' (x:xs) = max x (maximum' xs)
+
+
+
+
+
+
 
