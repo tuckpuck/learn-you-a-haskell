@@ -595,9 +595,17 @@ maximum' [] = error "maximum of empty list!"
 maximum' [x] = x
 maximum' (x:xs) = max x (maximum' xs)
 
+-- Replicate function recreated using recursion
+replicate' :: Int -> a -> [a]
+replicate' n x 
+    | n <= 0 = []
+    | otherwise = x : replicate' (n-1) x
 
-
-
+-- Take function using recursion
+take' :: Int -> [a] -> [a]
+take' 0 _        = []
+take' _ []       = []
+take' n (x:xs) = x : take' (n-1) xs
 
 
 
