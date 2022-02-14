@@ -607,5 +607,32 @@ take' 0 _        = []
 take' _ []       = []
 take' n (x:xs) = x : take' (n-1) xs
 
+-- Reverse function using recursion
+reverse' :: [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+-- Repeat function using recursion
+repeat' :: a -> [a]
+repeat' x = x:repeat' x
+
+-- Zip function using recursion
+zip' :: [a] -> [b] -> [(a,b)]
+zip' [] _ = []
+zip' _ [] = []
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+
+-- Elem function using recursion
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' _ [] = False
+elem' a (x:xs) = 
+    | a == x = True 
+    | otherwise = a `elem` xs
+
+
+
+
+
+
 
 
