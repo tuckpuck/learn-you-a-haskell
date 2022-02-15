@@ -625,11 +625,18 @@ zip' (x:xs) (y:ys) = (x,y):zip' xs ys
 -- Elem function using recursion
 elem' :: (Eq a) => a -> [a] -> Bool
 elem' _ [] = False
-elem' a (x:xs) = 
+elem' a (x:xs) 
     | a == x = True 
     | otherwise = a `elem` xs
 
-
+-- Quicksort function using recursion
+-- Quicksort takes one item called the "pivot", and determines which are higher and lower than it. Higher and lower items will then be sorted recursively
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) = 
+    let itemsLessThanOrEqualToPivot = [a | a <- xs, a <= x]
+        itemsGreaterThanPivot = [a | a <- xs, a > x]
+    in quicksort itemsLessThanOrEqualToPivot ++ [x] ++ quicksort itemsGreaterThanPivot
 
 
 
