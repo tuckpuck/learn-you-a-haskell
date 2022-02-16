@@ -657,6 +657,20 @@ compareWithHundred' :: Int -> Ordering
 compareWithHundred' = compare 100 
 
 
+-- Infix functions and be partially applied using sections
+-- To section an infix function, surround it with parenthesis and supply a parameter on only one side
+divideByTen :: (Floating a) => a -> a
+divideByTen = (/10)
+
+-- Another infix example using elem to check if a character is uppercase
+isUpperAlphanum :: Char -> Bool
+isUpperAlphanum = (`elem` ['A'..'Z'])
+
+-- One issue with sections is with negative numbers. Better to use (subtract 4) in this case because (-4) is interpreted as negative number.
+
+
+
+
 
 
 
