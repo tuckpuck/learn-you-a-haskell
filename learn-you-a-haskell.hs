@@ -638,6 +638,26 @@ quicksort (x:xs) =
         itemsGreaterThanPivot = [a | a <- xs, a > x]
     in quicksort itemsLessThanOrEqualToPivot ++ [x] ++ quicksort itemsGreaterThanPivot
 
+---- Higher Order Functions ----
+-- Functions in Haskell officially take only one parameter.
+-- To add more parameters, use a curried function: when each parameter is called, it returns a function that takes on the next parameter. 
+-- Calling a function with too few parameters is a partially applied function
+
+-- Defining the initial function:
+multThree :: Int -> Int -> Int -> Int
+multThree x y z = x * y * z
+-- Creating a function that uses the inital function, partially applied
+multTwoItemsWithNine = multThree 9
+
+-- Compare with 100
+compareWithHundred :: Int -> Ordering
+compareWithHundred x = compare 100 x
+-- Rewrite compare with 100 as an higher order function
+compareWithHundred' :: Int -> Ordering
+compareWithHundred' = compare 100 
+
+
+
 
 
 
