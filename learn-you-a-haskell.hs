@@ -665,12 +665,16 @@ divideByTen = (/10)
 -- Another infix example using elem to check if a character is uppercase
 isUpperAlphanum :: Char -> Bool
 isUpperAlphanum = (`elem` ['A'..'Z'])
-
 -- One issue with sections is with negative numbers. Better to use (subtract 4) in this case because (-4) is interpreted as negative number.
 
-
-
-
+-- Function that calls itself once
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+-- parenthesis are necessary here b/c the first parameter is a function that takes one param and returns a value of the same type
+applyTwiceNums = applyTwice (+3) 10
+applyTwiceStrings = applyTwice (++ " HAHA") "Hey"
+applyTwiceMult = applyTwice (*9) 9
+applyTwiceList = applyTwice (3:) [1]
 
 
 
