@@ -667,7 +667,7 @@ isUpperAlphanum :: Char -> Bool
 isUpperAlphanum = (`elem` ['A'..'Z'])
 -- One issue with sections is with negative numbers. Better to use (subtract 4) in this case because (-4) is interpreted as negative number.
 
--- Function that calls itself once
+-- Function that calls itself twice
 applyTwice :: (a -> a) -> a -> a
 applyTwice f x = f (f x)
 -- parenthesis are necessary here b/c the first parameter is a function that takes one param and returns a value of the same type
@@ -676,7 +676,18 @@ applyTwiceStrings = applyTwice (++ " HAHA") "Hey"
 applyTwiceMult = applyTwice (*9) 9
 applyTwiceList = applyTwice (3:) [1]
 
+-- Zipwith function created with a higher order function
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
+zipMult = zipWith' (*) [2,3] [5,7]
+zipPlus = zipWith' (+) [2,3] [5,7]
+zipMax = zipWith' max [6,3,4,2] [4,6,9,8]
+zipString = zipWith' (++) ["hello ", "this "] ["is ", "example "]
+zipRep = zipWith' (*) (replicate 5 2) [1..]
+zipRecursive = zipWith' (zipWith' (*)) [[1,2,3], [4,5,6], [7,8,9]] [[10,11,12], [13,14,15], [16,17,18]]
 
 
 
