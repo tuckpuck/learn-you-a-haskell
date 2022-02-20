@@ -689,6 +689,14 @@ zipString = zipWith' (++) ["hello ", "this "] ["is ", "example "]
 zipRep = zipWith' (*) (replicate 5 2) [1..]
 zipRecursive = zipWith' (zipWith' (*)) [[1,2,3], [4,5,6], [7,8,9]] [[10,11,12], [13,14,15], [16,17,18]]
 
+-- Flip function (takes a function and returns a function but with the first two arguments flipped)
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f y x = f x y
+
+normZip = zip [1,2,3,4,5] "hello"
+flipZip = flip' zip [1,2,3,4,5] "hello"
+
+
 
 
 
