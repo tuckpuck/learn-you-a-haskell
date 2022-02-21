@@ -696,6 +696,15 @@ flip' f y x = f x y
 normZip = zip [1,2,3,4,5] "hello"
 flipZip = flip' zip [1,2,3,4,5] "hello"
 
+-- Map function. Takes a function and a list and applies the function to every element in the list
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
+
+mapPlus = map' (+10) [12,34,56] 
+mapConcat = map' (++"!") ["HEY", "HIYO", "WHAT"]
+mapReplicate = map' (replicate 3) [3..6]
+
 
 
 
