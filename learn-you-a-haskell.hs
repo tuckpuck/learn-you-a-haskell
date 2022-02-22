@@ -705,7 +705,14 @@ mapPlus = map' (+10) [12,34,56]
 mapConcat = map' (++"!") ["HEY", "HIYO", "WHAT"]
 mapReplicate = map' (replicate 3) [3..6]
 
+-- Filter function. Takes a predicate (a function that returns a boolean) and a list. Sorts the list
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' p (x:xs) 
+    | p x = x : filter' p xs
+    | otherwise = filter' p xs
 
-
-
-
+filterGreater = filter' (>9) [1,4,10,30]
+filterEqual = filter' (==3) [1,2,3,4,5]
+filterEven = filter' even [1..10]
+filterLower = filter' (`elem` ['a'..'z']) "HeLlO WoRlD"
