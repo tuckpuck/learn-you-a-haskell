@@ -716,3 +716,26 @@ filterGreater = filter' (>9) [1,4,10,30]
 filterEqual = filter' (==3) [1,2,3,4,5]
 filterEven = filter' even [1..10]
 filterLower = filter' (`elem` ['a'..'z']) "HeLlO WoRlD"
+
+-- Find the largest number under 100,000 that's divisible by 3829
+findDivisibleNum :: Integer
+findDivisibleNum = head (filter p [99999, 99998..])
+    where p x = x `mod` 3829 == 0
+-- Because we use 'head' it will get the first numver and then stop due to Haskell's laziness
+
+-- find the sum of all odd squares smaller than 10,000
+-- We are using takeWhile, which takes a predicate and a list. It will return the list's elements as long as the predicate holds true 
+sumOddSquares :: Integer
+sumOddSquares = sum (takeWhile (<10000) (filter odd (map' (^2) [1..10000])))
+
+-- Show all odd squares under 10000
+showOddSquares :: [Int]
+showOddSquares = takeWhile (<10000) (filter odd (map' (^2) [1..10000]))
+
+-- Sum all odd squares under 10000 using list comprehensions
+sumOddSquaresComp :: Int
+sumOddSquaresComp = sum (takeWhile (<10000) [x^2 | x <- [1..10000], odd x])
+
+-- Show all odd squares under 10000 using list comprehensions
+showOddSquaresComp :: [Int]
+showOddSquaresComp = takeWhile (<10000) [x^2 | x <- [1..10000], odd x]
