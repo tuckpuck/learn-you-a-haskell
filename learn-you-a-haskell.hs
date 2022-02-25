@@ -754,4 +754,8 @@ numLongChains :: Int
 numLongChains = length (filter isLong (map chain [1..100]))
     where isLong xs = length xs > 15
 
-
+-- Mapping functions with partial parameters
+-- This can be used to create partial functions ready for the application of  one more param
+mapMultiply = map (*) [1..10]
+-- Get the item at index 5 (which is 6 in this case)
+testMapMultiply = (mapMultiply !! 5) 5
