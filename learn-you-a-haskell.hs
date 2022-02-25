@@ -739,3 +739,19 @@ sumOddSquaresComp = sum (takeWhile (<10000) [x^2 | x <- [1..10000], odd x])
 -- Show all odd squares under 10000 using list comprehensions
 showOddSquaresComp :: [Int]
 showOddSquaresComp = takeWhile (<10000) [x^2 | x <- [1..10000], odd x]
+
+-- Create a collatz sequence function. 
+-- Rules of collatz sequence: Start with any natural number. If number is one, stop. If number is even, divide by 2. If number is odd, mulitply by 3 and add 1. Repeat until it reaches 1. 
+
+chain :: Integer -> [Integer]
+chain 1 = [1]
+chain n 
+    | even n = n:chain (n `div` 2)
+    | odd n = n:chain (n*3 + 1)
+
+-- For all starting numbers between 1 and 100, how many collatz chains have a length greater than 15?
+numLongChains :: Int
+numLongChains = length (filter isLong (map chain [1..100]))
+    where isLong xs = length xs > 15
+
+
