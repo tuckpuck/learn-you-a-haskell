@@ -759,3 +759,36 @@ numLongChains = length (filter isLong (map chain [1..100]))
 mapMultiply = map (*) [1..10]
 -- Get the item at index 5 (which is 6 in this case)
 testMapMultiply = (mapMultiply !! 5) 5
+
+-- Lambdas
+-- Lambdas are anonymous functions that we use when we need a function only once
+-- Usually used with the sole purpose of passing it to a higher order function
+-- Lambdas are declared like so: (\ paramaters -> function body)
+-- numLongChains (from above) rewritten using lambdas:
+numLongChains' :: Int
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+-- Lambdas are expressions can can be passed to functions 
+-- These expressions are equivalent:
+mapOne = map (+3) [1,6,3,2]
+mapTwo = map (\x -> x + 3) [1,6,3,2]
+-- Lambdas can take any number of parameters
+zipLambda = zipWith (\a b -> (a * 30 + 3) / b) [5,4,3,2,1] [ 1,2,3,4,5]
+-- It is also possible to pattern match using lambdas, but you can't define several patterns
+-- If a pattern match fails it will trigger a runtime error
+lambdaMatch = map (\(a,b) -> a + b) [(1,2), (3,5), (6,3), (2,6), (2,5)]
+
+-- The two below functions are equivalent. The second one uses currying
+-- When lambdas are not surrounded by parenthesis it assumes everything to the right of -> belongs to it
+addThree' :: Int -> Int -> Int -> Int
+addThree' x y z = x + y + z
+
+addThree'' :: Int -> Int -> Int -> Int
+addThree'' = \x -> \y -> \z -> x + y + z
+-- The above function is just a gimmick to illustrate currying
+-- The below example is a more useful example because it becomes more readable when defined with lambdas
+flip'' :: (a -> b -> c) -> b -> a -> c
+flip'' f = \x y -> f y x
+-- Lambdas can be used when making it explicit that your functions are meant to be partially applied then passed to other functions as a parameter
+
+
+
