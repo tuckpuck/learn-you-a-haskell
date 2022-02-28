@@ -792,3 +792,16 @@ flip'' f = \x y -> f y x
 
 
 
+--Folds
+--Folds encapsulate the common recursive pattern with base case and x:xs pattern
+--Folds can be used to implement any function where you traverse a list once, element by element, and then return a single value
+--Fold takes a binary function, starting value, and a list to fold up
+--Lists can be folded from the left or right. 
+-- Here is a left fold with foldl:
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+sumTest = sum' [3,5,2,1]
+-- A simpler way to write the above fold is like this:
+sum'' :: (Num a) => [a] -> a
+sum'' xs = foldl (+) 0 
+
