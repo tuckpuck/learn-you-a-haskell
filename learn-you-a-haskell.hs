@@ -803,5 +803,21 @@ sum' xs = foldl (\acc x -> acc + x) 0 xs
 sumTest = sum' [3,5,2,1]
 -- A simpler way to write the above fold is like this:
 sum'' :: (Num a) => [a] -> a
-sum'' xs = foldl (+) 0 
+sum'' = foldl (+) 0 
+
+-- Right fold with foldr 
+-- Same as left fold, except the accumulator goes from the right, and the parameters are reversed (current list value is first, accumulator is second)
+-- Usually use right folds when building new lists from a list
+-- Right folds work on infinite lists, but left folds don't 
+-- Map function implemented with a right fold:
+map'' :: (a -> b) -> [a] -> [b]
+map'' f xs = foldr (\x acc -> f x : acc) [] xs
+mapTest = map'' (+3) [1,2,3]
+
+-- Implement elem function using foldr
+elem'' :: (Eq a) => a -> [a] -> Bool
+elem'' y ys = foldr (\x acc -> if x == y then True else acc) False ys
+testElem1 = elem'' 1 [1,3,5]
+testElem2 = elem'' 4 [1,3,6]
+-- Remember that type of the accumulator and type of the end result are always the same with folds
 
