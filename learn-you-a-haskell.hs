@@ -821,3 +821,20 @@ testElem1 = elem'' 1 [1,3,5]
 testElem2 = elem'' 4 [1,3,6]
 -- Remember that type of the accumulator and type of the end result are always the same with folds
 
+
+-- foldl1 and foldr1 are the same as foldl and foldr, except you don't need to provide an explicit starting accumulator
+-- They assume the first (or last) element to be the starting accumulator 
+-- Will call a runtime error if called with empty lists. Foldl and foldr are fine with empty lists
+-- Max can be implemented like this:
+maximum'' :: (Ord a) => [a] -> a
+maximum'' = foldl1 max
+testMax = maximum'' [1,3,5,6,3,2,5,7,8,1,81,24]
+
+-- Reverse written using folds:
+reverse'' :: [a] -> [a]
+reverse'' = foldl (\acc x -> x : acc) []
+testReverse = reverse'' [1,2,3,4,5,6,7,8,9]
+-- Another way to write this is:
+reverse''' :: [a] -> [a]
+reverse''' = foldl (flip(:)) []
+testReverse2 = reverse''' [1,2,3,4,5,6,7,8,9]
