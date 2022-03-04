@@ -838,3 +838,18 @@ testReverse = reverse'' [1,2,3,4,5,6,7,8,9]
 reverse''' :: [a] -> [a]
 reverse''' = foldl (flip(:)) []
 testReverse2 = reverse''' [1,2,3,4,5,6,7,8,9]
+
+-- Product written as a foldl
+product' :: (Num a) => [a] -> a
+product' = foldl (*) 1
+testProduct = product' [2,5,10]
+
+-- Filter written as a foldr
+filter'' :: (a -> Bool) -> [a] -> [a]
+filter'' p = foldr (\x acc -> if p x then x:acc else acc) []
+testFilter = filter'' (>10) [1,2,4,6,78,3,44,5]
+
+-- Last written using foldl1
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+testLast = last' [1,4,6,8,10]
