@@ -853,3 +853,15 @@ testFilter = filter'' (>10) [1,2,4,6,78,3,44,5]
 last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
 testLast = last' [1,4,6,8,10]
+
+-- Folds can also be used as successive application of some function to elements in a list
+-- If function is (+) and the starting accumulator is 0, it essentially looks like this 3 + (4 + (5 + (6 + 0)))
+-- Because of this, foldr can work fine on infinite lists. 
+-- && Returns false if one or more elements is false, otherwise it returns true
+-- This function will return cycle until it encounters an element that is false, in which case it returns False:
+and' :: [Bool] -> Bool
+and' xs = foldr (&&) True xs
+testTrueAnd = and' [True, True]
+testFalseAnd = and' [True, False, True]
+-- Because Haskell is lazy, we can pass in an infinite list because it will terminate once it evaluates to false:
+testInfinteFalseAnd = and' (repeat False)
