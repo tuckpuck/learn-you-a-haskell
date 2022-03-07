@@ -865,3 +865,19 @@ testTrueAnd = and' [True, True]
 testFalseAnd = and' [True, False, True]
 -- Because Haskell is lazy, we can pass in an infinite list because it will terminate once it evaluates to false:
 testInfinteFalseAnd = and' (repeat False)
+
+
+-- Scans 
+-- Scanl and scanr are like foldr and foldl, except that they report all intermediate accumulator states in the form of a list. 
+-- There is alooso scanl1 and scanr1, which are analogous to foldl1 and foldr1
+testScanl = scanl (+) 0 [3,5,2,1]
+testScanr = scanr (+) 0 [3,5,2,1]
+testScanl1 = scanl1 (\ acc x -> if x > acc then x else acc) [3,4,5,3,7,9,2,3,1]
+testScanlFlip = scanl (flip(:)) [] [5,4,3,2,1]
+
+-- Check how elements does it take for the sum of the square roots of all natural numbers to exceed 1000
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1 
+-- We use takeWhile here because it will cut off at 1000, whereas filter would continue because it doesn't know it is an ascending list
+
+
