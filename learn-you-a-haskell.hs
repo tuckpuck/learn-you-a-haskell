@@ -881,3 +881,22 @@ sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
 -- We use takeWhile here because it will cut off at 1000, whereas filter would continue because it doesn't know it is an ascending list
 
 
+-- $ function
+-- called the function application operator
+-- $ has the lowest precedence, and is right associative. 
+-- It's a convenience function that lets us write fewer parentheses.
+-- These are the same:
+sumWithParens = sum (map sqrt [1..130])
+sumWithFAO = sum $ map sqrt [1..130]
+-- These are also the same:
+sqrtWithParens = sqrt (3 + 4 + 9)
+sqrtWithFAO = sqrt $ 3 + 4 + 9
+-- You can imagine $ being the opening parentheses, and then adding an invisible closing parentheses on the far right of the equation. 
+-- This can also be rewritten using $:
+functionWithParens = sum (filter (> 10) (map (*2) [2..10]))
+functionWithFAO = sum $ filter (>10) (map (*2) [ 2..10])
+-- Or even further reduced:
+functionWithTwoFAOs = sum $ filter (>10) $ map (*2) [ 2..10]
+
+-- $ can also be used to map function application over a list of functions:
+applyUsingFAO = map ($ 3) [(4+), (10*), (^2), sqrt]
