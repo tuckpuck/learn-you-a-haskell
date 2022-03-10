@@ -67,13 +67,13 @@ doubleTen = doubleMe 10
 -- Takes two numbers, multiplies them by 2, and adds them together
 doubleUs x y = x * 2 + y * 2
 doubleTenTen = doubleUs 10 10 
--- Functions that you defiine can also call eachother. The above function could be redefined as:
+-- Functions that you define can also call each other. The above function could be redefined as:
 doubleUsAgain x y = doubleMe x + doubleMe y
 
 -- Multiplies a number by 2 if that number is less than 100. 
 -- If must have else in haskell because every function must return a value in declarative languages
 doubleSmallNumber x = if x > 100 then x else x * 2
--- Apostraphe denotes a strict version (not lazy), or a slightly modified version of a function with a similar name
+-- Apostrophe denotes a strict version (not lazy), or a slightly modified version of a function with a similar name
 doubleSmallNumber' x = (if x > 100 then x else x * 2) + 1
 
 -- A definition or name takes no parameters and cannot be changed once set
@@ -900,3 +900,21 @@ functionWithTwoFAOs = sum $ filter (>10) $ map (*2) [ 2..10]
 
 -- $ can also be used to map function application over a list of functions:
 applyUsingFAO = map ($ 3) [(4+), (10*), (^2), sqrt]
+
+-- Function composition
+-- Function composition can be used to make functions on the fly to pass to other functions
+-- To turn a list of numbers into negative numbers, we could use a lambda:
+turnNegative :: [Int] -> [Int]
+turnNegative = map (\x -> negate (abs x)) 
+testTurnNegative = turnNegative [1,-3,5,9,5,-6,3]
+-- Or we could use function composition:
+turnNegativeFC :: [Int] -> [Int]
+turnNegativeFC = map (negate . abs)
+testTurnNegativeFC = turnNegativeFC [1,-3,5,9,5,-6,3]
+-- Function composition is right associative
+-- f(g(z x)) is the same as (f . g . z) x
+
+-- Function composition allows us to write cleaner looking code. This:
+lambdaFn = map (\xs -> negate(sum(tail xs))) [[1..5], [3..6], [1..7]]
+-- becomes this: 
+fcFunction = map (negate . sum . tail) [[1..5], [3..6], [1..7]]
