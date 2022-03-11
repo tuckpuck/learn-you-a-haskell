@@ -918,3 +918,15 @@ testTurnNegativeFC = turnNegativeFC [1,-3,5,9,5,-6,3]
 lambdaFn = map (\xs -> negate(sum(tail xs))) [[1..5], [3..6], [1..7]]
 -- becomes this: 
 fcFunction = map (negate . sum . tail) [[1..5], [3..6], [1..7]]
+
+-- Function composition with multiple parameters
+-- If the functions take several parameters, we will partially apply them so that each takes just one parameter
+-- This can be rewritten:
+multiParam = sum (replicate 5 (max 5.7 8.9))
+-- As this:
+multiParamFC = (sum . replicate 5) (max 5.7 8.9)
+-- To rewrite an expression with lots of parenthesis using function composition, start by writing the innermost and its params. Put a $ before it, and compose all the functions that came before by butting FC.
+-- For example:
+manyParams = replicate 2 (product (map(*3) (zipWith max [1,2][4,5])))
+-- Would be rewritten as: 
+manyParamsFC = replicate 2 . product . map (*3) $ zipWith max [1,2][4,5]
