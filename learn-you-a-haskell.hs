@@ -930,3 +930,14 @@ multiParamFC = (sum . replicate 5) (max 5.7 8.9)
 manyParams = replicate 2 (product (map(*3) (zipWith max [1,2][4,5])))
 -- Would be rewritten as: 
 manyParamsFC = replicate 2 . product . map (*3) $ zipWith max [1,2][4,5]
+
+
+
+-- Point free style
+-- If we use function composition, we can get rid of the variable on both sides. This is possible due to currying. So this:
+fn x = ceiling(negate(tan(cos(max 50 x))))
+-- Becomes this:
+fn = ceiling . negate . tan . cos . max 50 
+-- This is clearer in many cases. But if it is too long, it's better to split into sub-problems that are easier for someone reading the code to understand. 
+
+
