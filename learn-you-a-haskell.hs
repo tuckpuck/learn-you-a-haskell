@@ -1,3 +1,5 @@
+import Data.List
+
 ---- ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
 -- gchi
@@ -937,7 +939,34 @@ manyParamsFC = replicate 2 . product . map (*3) $ zipWith max [1,2][4,5]
 -- If we use function composition, we can get rid of the variable on both sides. This is possible due to currying. So this:
 fn x = ceiling(negate(tan(cos(max 50 x))))
 -- Becomes this:
-fn = ceiling . negate . tan . cos . max 50 
+fn2 = ceiling . negate . tan . cos . max 50 
 -- This is clearer in many cases. But if it is too long, it's better to split into sub-problems that are easier for someone reading the code to understand. 
 
+
+---- Modules ---- 
+-- Modules are files that define some functions, types, and type classes
+-- A program is a collection of modules. 
+-- Functions and types are exported from a module. 
+-- Modules are useful because they can be reused in different programs. 
+-- The Haskell standard library is split into modules. 
+-- Everything we've used so far is part of the Prelude module, which is imported by default
+
+-- Importing modules
+-- The syntax for importing modules: import moduleName
+-- Imports are done at the top of the file, before defining any functions. 
+-- One script can import several modules. 
+-- A useful import is Data.List, which has functions for working with lists. 
+-- Here we will use Data.List to import the nub function and use it below. Nub weeds out duplicate elements. 
+numUniques :: (Eq a) => [a] -> Int
+numUniques = length . nub
+
+-- Importing into GHCI
+-- You can also import functions into ghci like this:   :m + Data.List
+-- You can import several at the same time into ghci:     :m + Data.List Data.Map Data.Set
+-- You can selectively import functions into ghci:       import Data.List (nub, sort)
+-- You can selectively exclude functions from being imported:      import Data.List hiding (nub)
+
+-- Sometimes there are name clashes when importing multiple modules. This can be solved using qualified imports:     import qualified Data.Map
+-- Now, to reference Data.Maps's filter function you must use Data.Map.filter. Alternatively, we can rename it upon import:     import qualified Data.Map as M
+-- That means to reference it you would use M.filter. The . symbol is used to reference functions from modules imported as qualified. 
 
