@@ -1,4 +1,4 @@
-import Data.List
+import qualified Data.List
 
 ---- ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
@@ -958,7 +958,7 @@ fn2 = ceiling . negate . tan . cos . max 50
 -- A useful import is Data.List, which has functions for working with lists. 
 -- Here we will use Data.List to import the nub function and use it below. Nub weeds out duplicate elements. 
 numUniques :: (Eq a) => [a] -> Int
-numUniques = length . nub
+numUniques = length . Data.List.nub
 
 -- Importing into GHCI
 -- You can also import functions into ghci like this:   :m + Data.List
@@ -970,3 +970,10 @@ numUniques = length . nub
 -- Now, to reference Data.Maps's filter function you must use Data.Map.filter. Alternatively, we can rename it upon import:     import qualified Data.Map as M
 -- That means to reference it you would use M.filter. The . symbol is used to reference functions from modules imported as qualified. 
 
+-- Counting words using Data.List. Figure out how many times each word appears in each string
+-- Words function converts a string into a list of strings where each string is one word
+-- Sort (also in Data.List) takes a list of things that can be ordered and returns a new list from smallest to largest (in length if strings)
+-- Group (also in Data.List) groups together words that are identical 
+wordNums :: String -> [(String, Int)]
+wordNums = map (\ws -> (head ws, length ws)) . Data.List.group . Data.List.sort . Data.List.words
+testWordNums = wordNums "Hello this is a sentence with some repeated words in the sentence"
