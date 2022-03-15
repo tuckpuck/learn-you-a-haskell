@@ -977,3 +977,13 @@ numUniques = length . Data.List.nub
 wordNums :: String -> [(String, Int)]
 wordNums = map (\ws -> (head ws, length ws)) . Data.List.group . Data.List.sort . Data.List.words
 testWordNums = wordNums "Hello this is a sentence with some repeated words in the sentence"
+
+-- Create a function that takes two lists and tells if the first list is contained anywhere in the second list.
+-- We'll refer to the list being searched as the haystack and the list we search for as the needle.
+-- We'll use tails function in Data.List. Tails takes a list and successively applies the tail function.
+-- isPrefixOf checks if one string starts with another. Ex. 'hawaii' `isPrefixOf` 'hawaii joe' //True
+-- Data.List.any lets us know if any element in the list satisfies the predicate. Ex. any (>4) [1,2,3] //False
+isIn :: (Eq a) => [a] -> [a] -> Bool
+needle `isIn` haystack = any (needle `Data.List.isPrefixOf`) (Data.List.tails haystack)
+testIsInTrue = "art" `isIn` "party"
+testIsInFalse = [1,2] `isIn` [1,3,5]
