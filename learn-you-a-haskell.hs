@@ -1,4 +1,5 @@
 import qualified Data.List
+import qualified Data.Char
 
 ---- ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
@@ -987,3 +988,16 @@ isIn :: (Eq a) => [a] -> [a] -> Bool
 needle `isIn` haystack = any (needle `Data.List.isPrefixOf`) (Data.List.tails haystack)
 testIsInTrue = "art" `isIn` "party"
 testIsInFalse = [1,2] `isIn` [1,3,5]
+
+
+-- Caesar cipher function
+-- Use Data.Char to encode messages
+-- Data.Char has functions 'ord' and 'chr' that convert characters to their corresponding numbers and visa versa
+-- Function that takes a number of positions to shift and a string, returns string where every character is shifted by that many numbers
+encode :: Int -> String -> String
+encode offset msg = map (\c -> Data.Char.chr $ Data.Char.ord c + offset) msg
+testEncode = encode 10 "Please instruct your men to take the left flank at 22:00"
+
+decode :: Int -> String -> String 
+decode offset msg = map (\c -> Data.Char.chr $ Data.Char.ord c - offset) msg
+testDecode = decode 10 "Zvok}o*sx}~|\DELm~*\131y\DEL|*wox*~y*~kuo*~ro*vop~*pvkxu*k~*<<D::"
