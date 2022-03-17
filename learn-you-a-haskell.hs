@@ -1001,3 +1001,9 @@ testEncode = encode 10 "Please instruct your men to take the left flank at 22:00
 decode :: Int -> String -> String 
 decode offset msg = map (\c -> Data.Char.chr $ Data.Char.ord c - offset) msg
 testDecode = decode 10 "Zvok}o*sx}~|\DELm~*\131y\DEL|*wox*~y*~kuo*~ro*vop~*pvkxu*k~*<<D::"
+
+-- foldl' using Data.List
+-- Data.List has a variation called foldl' that evaluates on every step. The original foldl can encounter stack overflow issues because it defers computations. 
+-- To demonstrate:
+foldOriginal = foldl (+) 0 (replicate 100000000 1)
+foldVariation = Data.List.foldl' (+) 0 (replicate 100000000 1) 
