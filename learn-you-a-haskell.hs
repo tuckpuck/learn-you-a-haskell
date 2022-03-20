@@ -1,6 +1,7 @@
 import qualified Data.List
 import qualified Data.Char
 
+
 ---- ghci aka glasgow haskell compiler interactive ----
 -- Open Haskell compiler
 -- gchi
@@ -1007,3 +1008,20 @@ testDecode = decode 10 "Zvok}o*sx}~|\DELm~*\131y\DEL|*wox*~y*~kuo*~ro*vop~*pvkxu
 -- To demonstrate:
 foldOriginal = foldl (+) 0 (replicate 100000000 1)
 foldVariation = Data.List.foldl' (+) 0 (replicate 100000000 1) 
+
+
+
+-- Find the sum of the digits of a natural number
+digitSum :: Int -> Int
+digitSum = sum . map Data.Char.digitToInt . show
+
+-- Find the first natural number that the sum of its digits equals 40 
+firstTo40 :: Maybe Int
+firstTo40 = Data.List.find (\x -> digitSum x == 40) [1..]
+
+-- Same as above but takes the desired sum as a param
+firstTo :: Int -> Maybe Int
+firstTo n = Data.List.find (\x -> digitSum x == n) [1..]
+
+
+
