@@ -1040,7 +1040,7 @@ findKey key ((k,v):xs)
 
 testFindKey = findKey "tucker" phoneBook
 testFindKey2 = findKey "jason" phoneBook
-
-
+-- The above function can be done natively using the lookup function
+testLookup = Data.List.lookup "tucker" phoneBook
 
 
