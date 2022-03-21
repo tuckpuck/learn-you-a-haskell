@@ -1024,4 +1024,23 @@ firstTo :: Int -> Maybe Int
 firstTo n = Data.List.find (\x -> digitSum x == n) [1..]
 
 
+-- Key Value pairs
+-- Association lists (aka dictionaries) are lists to store key/value pairs where ordering doesn't matter
+phoneBook =
+  [("john", "555-1234") 
+  ,("jane", "555-5678")
+  ,("tucker", "123-4567")
+  ]
+-- Function that looks up a value given a key and a list of key/value pairs: 
+findKey :: (Eq k) => k -> [(k, v)] -> Maybe v
+findKey key [] = Nothing
+findKey key ((k,v):xs)
+    | key == k = Just v
+    | otherwise = findKey key xs
+
+testFindKey = findKey "tucker" phoneBook
+testFindKey2 = findKey "jason" phoneBook
+
+
+
 
