@@ -1,5 +1,6 @@
 import qualified Data.List
 import qualified Data.Char
+import qualified Data.Map
 
 
 ---- ghci aka glasgow haskell compiler interactive ----
@@ -1044,3 +1045,29 @@ testFindKey2 = findKey "jason" phoneBook
 testLookup = Data.List.lookup "tucker" phoneBook
 
 
+-- Data.Map offers list associations that are faster and provide a lot of utilities
+-- To use these features, we must convert a list of associations to a map using Data.Map.fromList. This will also discard items with duplicate keys
+-- Change our original phonebook into a map:
+phoneBook' :: Data.Map.Map String String
+phoneBook' = Data.Map.fromList $
+  [("john", "555-1234") 
+  ,("jane", "555-5678")
+  ,("tucker", "123-4567")
+  ]
+
+-- Lookup a phone number
+lookupTucker = Data.Map.lookup "tucker" phoneBook'
+
+-- Create a new phonebook and insert a value
+newBook = Data.Map.insert "sam" "437-8563" phoneBook'
+
+-- Check size of a map
+bookSize = Data.Map.size phoneBook'
+newSize = Data.Map.size newBook
+
+-- Function that finds integers in a string and converts it to a list
+string2digits :: String -> [Int]
+string2digits = map Data.Char.digitToInt . filter Data.Char.isDigit
+
+-- Convert phone book numbers to Ints 
+intBook = Data.Map.map string2digits phoneBook'
