@@ -1071,3 +1071,32 @@ string2digits = map Data.Char.digitToInt . filter Data.Char.isDigit
 
 -- Convert phone book numbers to Ints 
 intBook = Data.Map.map string2digits phoneBook'
+
+-- If you are pulling from an association list with duplicates (and want to keep them) you can use Data.Map.fromListWith
+-- Instead of discarding duplicates, it takes a function to decide what to do with them
+
+phoneBookWithDuplicates = 
+  [("john", "555-1234") 
+  ,("jane", "555-5678")
+  ,("jane", "143-4654")
+  ,("tucker", "123-4567")
+  ,("tucker", "943-2452")
+  ]
+
+phoneBookToMap :: (Ord k) => [(k, String)] -> Data.Map.Map k String
+phoneBookToMap xs = Data.Map.fromListWith add xs 
+    where add number1 number2 = number1 ++ ", " ++ number2
+
+phoneBookMapWithDuplicates = phoneBookToMap phoneBookWithDuplicates
+
+-- Another possibility is too make all the values into singleton lists
+phoneBookToMapSingleton :: (Ord k) => [(k,a)] -> Data.Map.Map k [a]
+phoneBookToMapSingleton xs = Data.Map.fromListWith (++) $ map (\(k,v) -> (k, [v])) xs
+
+phoneBookMapWithDuplicateSingletons = phoneBookToMapSingleton phoneBookWithDuplicates
+
+-- Keep the biggest value in an association list
+fromListWithMax = Data.Map.fromListWith max [(2,3), (2,5), (3,54), (3,21)]
+
+-- Add together values that share keys
+fromListWitAdd = Data.Map.fromListWith (+) [(2,3), (2,5), (3,54), (3,21)]
