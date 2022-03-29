@@ -1,6 +1,7 @@
 import qualified Data.List
 import qualified Data.Char
 import qualified Data.Map
+import qualified Geometry
 
 
 ---- ghci aka glasgow haskell compiler interactive ----
@@ -1100,3 +1101,7 @@ fromListWithMax = Data.Map.fromListWith max [(2,3), (2,5), (3,54), (3,21)]
 
 -- Add together values that share keys
 fromListWitAdd = Data.Map.fromListWith (+) [(2,3), (2,5), (3,54), (3,21)]
+
+
+-- Using imported modules
+showCubeArea = Geometry.cubeArea 22
