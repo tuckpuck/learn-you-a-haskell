@@ -1,7 +1,14 @@
 import qualified Data.List
 import qualified Data.Char
 import qualified Data.Map
+-- Import all geometry functions
 import qualified Geometry
+-- Import geometry submodules
+import qualified Geometry.Sphere as Sphere
+import qualified Geometry.Cuboid as Cuboid
+import qualified Geometry.Cube as Cube
+
+
 
 
 ---- ghci aka glasgow haskell compiler interactive ----
@@ -1102,6 +1109,9 @@ fromListWithMax = Data.Map.fromListWith max [(2,3), (2,5), (3,54), (3,21)]
 -- Add together values that share keys
 fromListWitAdd = Data.Map.fromListWith (+) [(2,3), (2,5), (3,54), (3,21)]
 
-
--- Using imported modules
+-- Using imported modules (the main Geometry.hs file)
 showCubeArea = Geometry.cubeArea 22
+
+-- Hierarchical modules (the Geometry/... submodules)
+-- Modules can have submodules, which can have submodules
+showSphereVolume = Sphere.sphereVolume 24.55
