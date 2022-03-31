@@ -1115,3 +1115,25 @@ showCubeArea = Geometry.cubeArea 22
 -- Hierarchical modules (the Geometry/... submodules)
 -- Modules can have submodules, which can have submodules
 showSphereVolume = Sphere.sphereVolume 24.55
+
+
+---- Making our own types and type classes ----
+-- You can make a new type using the data keyword. For example, this is how Bool is defined in the standard library: data Bool = False | True
+-- Everything before the equal sign is the type, and after the equal sign are the value constructors. 
+-- Both the type name and and value constructors start with an uppercase letter.
+
+-- Here we make a shape data type:
+-- Deriving show is added to a allow it to print
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+    deriving (Show)
+
+area :: Shape -> Float
+area (Circle _ _ r) = pi * r ^ 2
+area (Rectangle x1 y1 x2 y2) = (abs $ x2 - x1) * (abs $ y2 - y1)
+
+findCircleArea = area (Circle 10 20 10)
+findRectArea = area (Rectangle 0 0 100 100)
+
+-- Value constructors are functions and can be mapped and partially applied
+-- Here is an example of creating concentric circles with different radii
+concentricCircles = map (Circle 10 10) [2,4,6,8]
