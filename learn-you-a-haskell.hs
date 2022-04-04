@@ -1157,3 +1157,26 @@ nudge (Circle' (Point x y) r) a b = Circle' (Point (x + a) (y + b)) r
 nudge (Rectangle' (Point x1 y1) (Point x2 y2)) a b = Rectangle' (Point (x1 + a) (y1 + b)) (Point (x2 + a) (y2 + b))
 
 tryNudge = nudge (Circle' (Point 34 34) 10) 5 10
+
+
+-- Auxiliary functions that create shapes at zero coordinates
+baseCircle :: Float -> Shape'
+baseCircle r = Circle' (Point 0 0) r
+
+baseRect :: Float -> Float -> Shape'
+baseRect width height = Rectangle' (Point 0 0) (Point width height)
+
+-- Custom types can also be exported
+-- To do so you add the type followed by .., for example
+-- module Shapes
+-- (Point(..)
+-- ,Shape(..),
+-- ,area
+-- ,nudge
+-- ) where
+
+-- We could also not import the value constructors directly, making them only usable via auxiliary functions
+-- This is what Data.Map does. How Maps are internally represented can change but it is hidden. Only function on Data.Map can be used. 
+
+
+
