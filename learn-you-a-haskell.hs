@@ -1179,4 +1179,46 @@ baseRect width height = Rectangle' (Point 0 0) (Point width height)
 -- This is what Data.Map does. How Maps are internally represented can change but it is hidden. Only function on Data.Map can be used. 
 
 
+-- Create a new Person data type
+-- First name, last name, age, height, phone number, and favorite ice cream flavor
+data Person = Person String String Int Float String String
+    deriving (Show)
+
+-- Create a person
+guy = Person "Buddy" "Finklestein" 43 184.2 "526-2928" "Chocolate"
+
+-- Add functions to get specific types of info
+firstName :: Person -> String
+firstName (Person firstname _ _ _ _ _) = firstname
+
+
+lastname :: Person -> String
+lastname (Person _ lastname _ _ _ _) = lastname
+
+age :: Person -> Int
+age (Person _ _ age _ _ _) = age
+
+height :: Person -> Float
+height (Person _ _ _ height _ _) = height
+
+phonenumber :: Person -> String
+phonenumber (Person _ _ _ _ phonenumber _) = phonenumber
+
+flavor :: Person -> String
+flavor (Person _ _ _ _ _ flavor) = flavor
+
+-- We could achieve the same as the above using the record syntax
+-- This creates the type, and automatically creates the functions to look up fields in the data type
+data Person' = Person' {firstName' :: String
+                        ,lastName' :: String
+                        ,age' :: Int
+                        ,height' :: Float
+                        ,phoneNumber' :: String
+                        ,flavor' :: String}
+    deriving (Show)
+
+otherGuy = Person' "Jason" "Smith" 24 183.23 "303-436-1834" "Rocky Road"
+
+
+
 
