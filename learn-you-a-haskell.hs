@@ -1219,6 +1219,25 @@ data Person' = Person' {firstName' :: String
 
 otherGuy = Person' "Jason" "Smith" 24 183.23 "303-436-1834" "Rocky Road"
 
+data Car = Car { company :: String
+                , model :: String
+                , year :: Int
+                } deriving (Show)
 
+suburu = Car {company="suburu", model="forrester", year=2006}
 
+-- Type parameters
+-- A value constructor can take some parameters to produce a new value
+-- You can pass a type as a type parameter using ::, but it is usually done through inference.
+-- These are useful because they allow for data types than can hold many different things.
+-- Our Car data type could be rewritten like this to make it more flexible (so it will work regardless of what kind of data we pass it)
+data Car' a b c = Car' {company' :: a
+                    , model' :: b
+                    , year' :: c
+                    } deriving (Show)
 
+-- Maybe represents an option of having nothiing or having one of something
+ford = Car' {company'="Ford", model'="F150", year'="2019"}
+chevy = Car' {company'="Ford", model'="F150", year'=2022}
+
+-- An example of a parameterized type is Data.Map k v. k and v can be whatever type because they are parameterized.
