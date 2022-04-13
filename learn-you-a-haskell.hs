@@ -1241,3 +1241,34 @@ ford = Car' {company'="Ford", model'="F150", year'="2019"}
 chevy = Car' {company'="Ford", model'="F150", year'=2022}
 
 -- An example of a parameterized type is Data.Map k v. k and v can be whatever type because they are parameterized.
+
+
+-- Create a vector type and associated functions
+-- The part before the = is the type constructor, and they part after are value constructors (could be multiple, separated by |)
+data Vector a = Vector a a a deriving (Show)
+
+-- Add two vectors together, resulting in a third vector
+vplus :: (Num a) => Vector a -> Vector a -> Vector a
+(Vector i j k) `vplus` (Vector l m n) = Vector (i+l) (j+m) (k+n)
+
+-- Multiply every component of a vector pairwise then adding it all together, to find the angle between two vectors
+dotProd :: (Num a) => Vector a -> Vector a -> a
+(Vector i j k) `dotProd` (Vector l m n) = i * l + j * m + k * n
+
+-- Mulitply a vector with a number, effectively elongating or shortening it
+vMult :: (Num a) => Vector a -> a -> Vector a
+(Vector i j k) `vMult` m = Vector (i*m) (j*m) (k*m)
+
+-- We don't add the Num class into the data declaration, because we would have to repeat it in the functions anyway
+-- These functions operate on any type of the Num type class
+
+testVplus = Vector 3 5 8 `vplus` Vector 9 2 8
+testVmult = Vector 3 9 7 `vMult` 10
+testDotProd = Vector 4 9 5 `dotProd` Vector 9.0 2.0 4.0
+
+assignedVector = Vector 3 5 8
+testVPlus' = assignedVector `vplus` Vector 9 2 8 
+
+
+
+
