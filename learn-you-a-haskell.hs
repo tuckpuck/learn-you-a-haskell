@@ -1271,4 +1271,26 @@ testVPlus' = assignedVector `vplus` Vector 9 2 8
 
 
 
+-- Derived instances
+-- Here we make a custom data type, and derive the Eq type class to check if two people are the same person
+-- The types of all fields must also be part of Eq tiype. But no problem because that's the case for String and Int
+data Person'' = Person'' { firstName'' :: String
+                     , lastName'' :: String
+                     , age'' :: Int} deriving (Eq)
+
+mikeD = Person'' {firstName'' = "Michael", lastName'' = "Diamond", age''=43}
+adRock = Person'' {firstName'' = "Adam", lastName'' = "Horovitz", age''=41}
+mca = Person'' {firstName'' = "Adam", lastName'' = "Horovitz", age''=41}
+
+testEquals1 = mca == adRock
+testEquals2 = mikeD == adRock
+testEquals3 = mikeD == mikeD
+testEquals4 = adRock == Person'' {firstName'' = "Adam", lastName'' = "Horovitz", age''=41}
+
+-- Additionally, since Person is now in Eq, we can use iit for all functions with a class constraint of Eq a in their type signature
+beastieBoys = [mikeD, adRock, mca]
+testElem = mikeD `elem` beastieBoys
+
+
+
 
