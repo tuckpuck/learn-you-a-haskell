@@ -1276,7 +1276,8 @@ testVPlus' = assignedVector `vplus` Vector 9 2 8
 -- The types of all fields must also be part of Eq tiype. But no problem because that's the case for String and Int
 data Person'' = Person'' { firstName'' :: String
                      , lastName'' :: String
-                     , age'' :: Int} deriving (Eq)
+                     , age'' :: Int} deriving (Eq, Show, Read)
+-- We also add Show here so we can print instances to the terminal. Read is used to take a string and convert it to a usable data type.
 
 mikeD = Person'' {firstName'' = "Michael", lastName'' = "Diamond", age''=43}
 adRock = Person'' {firstName'' = "Adam", lastName'' = "Horovitz", age''=41}
@@ -1290,7 +1291,3 @@ testEquals4 = adRock == Person'' {firstName'' = "Adam", lastName'' = "Horovitz",
 -- Additionally, since Person is now in Eq, we can use iit for all functions with a class constraint of Eq a in their type signature
 beastieBoys = [mikeD, adRock, mca]
 testElem = mikeD `elem` beastieBoys
-
-
-
-
