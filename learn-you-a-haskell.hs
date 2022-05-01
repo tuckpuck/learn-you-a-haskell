@@ -1323,3 +1323,14 @@ enum1 = succ Monday
 enum2 = pred Saturday
 enum3 = [Thursday .. Sunday]
 enum4 = [minBound .. maxBound] :: [Day]
+
+-- Type synonyms
+-- [Char] and String being interchangable is done with type synonyms, like this: type String = [Char]
+-- They are used to give types different names so they make more sense to someone reading our code.
+-- Improving a function to check if a name and number combo is in our phoneBook with type synonyms: 
+type PhoneNumber = String
+type Name = String
+type PhoneBook = [(Name, PhoneNumber)]
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+inPhoneBook name pnumber pbook = (name, pnumber) `elem` pbook
