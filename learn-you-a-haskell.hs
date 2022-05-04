@@ -1341,3 +1341,41 @@ type AssocList k v = [(k, v)]
 -- Type paramaters can be partially applied just like functions.
 -- We can use this to set the types of numbers as Int like this:
 myList = [(1,2),(3,5),(8,9)] :: AssocList Int Int
+
+-- Data types using Either
+-- You can set up custom data types where either instance has different properties
+-- data Either a b = Left a | Right b deriving (Eq, Ord, Read, Show)
+-- If left is used, it has contents of type a. If right is used it has contents of type b
+-- When you are interested in how or why some function failed, we use the result type of Eitehr a  b, 
+-- where a can tell us about the possible failure, and b handles successful computation
+-- For an example, we can set up a type and function to check if lockers are taken
+data LockerState = Taken | Free deriving (Show, Eq)
+type Code = String
+type LockerMap = Data.Map.Map Int (LockerState, Code)
+-- Then we make a function that searches for the code in a locker map. Either String Code represents our result, because our lookup can fail in two ways: the locker can be take or the locker number might not exist. 
+lockerLookup :: Int -> LockerMap -> Prelude.Either String Code
+lockerLookup lockerNumber map = case Data.Map.lookup lockerNumber map of 
+    Nothing -> Left $ "Locker " ++ show lockerNumber ++ " doesn't exist"
+    Just (state, code) -> if state /= Taken
+        then Right code
+        else Left $ "Locker " ++ show lockerNumber ++ " is already taken!"
+-- And an example map to try it
+lockers :: LockerMap  
+lockers = Data.Map.fromList   
+    [(100,(Taken,"ZD39I"))  
+    ,(101,(Free,"JAH3I"))  
+    ,(103,(Free,"IQSA9"))  
+    ,(105,(Free,"QOTSA"))  
+    ,(109,(Taken,"893JJ"))  
+    ,(110,(Taken,"99292"))  
+    ]  
+
+lockerTest1 = lockerLookup 101 lockers
+lockerTest2 = lockerLookup 100 lockers
+lockerTest3 = lockerLookup 102 lockers
+lockerTest4 = lockerLookup 110 lockers
+lockerTest5 = lockerLookup 105 lockers
+
+
+
+
