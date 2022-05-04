@@ -1334,3 +1334,10 @@ type PhoneBook = [(Name, PhoneNumber)]
 
 inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
 inPhoneBook name pnumber pbook = (name, pnumber) `elem` pbook
+
+-- Type synonyms can also be parameterized. 
+-- We could make an associated list type like this:
+type AssocList k v = [(k, v)]
+-- Type paramaters can be partially applied just like functions.
+-- We can use this to set the types of numbers as Int like this:
+myList = [(1,2),(3,5),(8,9)] :: AssocList Int Int
