@@ -1379,3 +1379,13 @@ lockerTest5 = lockerLookup 105 lockers
 
 
 
+-- Recursive data structures
+-- Cons is another word for :
+-- Here we make our own types using alegbraic data types:
+data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)
+-- This could also be written this way
+data List' a = Empty' | Cons' { listHead :: a, listTail :: List a } deriving (Show, Read, Eq, Ord)
+
+-- The below is the same as 4:(5:[])
+consTest = 4 `Cons` (5 `Cons` Empty)
+
